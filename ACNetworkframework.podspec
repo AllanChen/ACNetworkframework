@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license      	= "MIT (example)"
   s.author       	= { "Allan" => "cyjian0@gmail.com" }
   s.source       	= { :git => "https://github.com/AllanChen/ACNetworkframework.git", :tag => "0.0.1" }
-  s.source_files  	= "NetworkHelper", "NetworkHelper/**/*.{h,m}"
+  s.source_files  	= "NetworkHelper", "NetworkHelper/**/*.{h,m}", "Helper", "Helper/**/*.{h,m}"
   #s.exclude_files 	= "Classes/Exclude"
   s.dependency "AFNetworking", "~> 2.0"
   s.platform     	= :ios, "6.0"
