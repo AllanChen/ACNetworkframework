@@ -3,15 +3,18 @@ Pod::Spec.new do |s|
   s.version      	= "0.0.1"
   s.summary      	= "This Networkframework is easy to use, you just add 2 files that network function is work for all page"
   s.ios.deployment_target = "6.0"
-  s.description  	= <<-DESC A longer description of ACNetworkframework in Markdown format.DESC
+  s.description  	= <<-DESC
+                   a network framework
+                   DESC
   s.homepage     	= "https://github.com/AllanChen/ACNetworkframework"
   s.frameworks  	= "QuartzCore", "UIKit"
-  s.license      	= "MIT"
+  s.license      	= "MIT (example)"
   s.author       	= { "Allan" => "cyjian0@gmail.com" }
   s.source       	= { :git => "https://github.com/AllanChen/ACNetworkframework.git", :tag => "0.0.1" }
-  s.source_files  	= "Classes", "Classes/**/*.{h,m}"
-  s.exclude_files 	= "Classes/Exclude"
+  s.source_files  	= "NetworkHelper", "NetworkHelper/**/*.{h,m}"
+  #s.exclude_files 	= "Classes/Exclude"
   s.dependency "AFNetworking", "~> 2.0"
+  s.platform     	= :ios, "5.0"
 
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
   # s.platform     = :ios
