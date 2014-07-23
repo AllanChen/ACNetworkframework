@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Utility : NSObject
+@interface Utility : UIViewController<UIAlertViewDelegate>
 /*
  | 颜色转换
  */
