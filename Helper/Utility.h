@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Utility : UIViewController
+@interface Utility : NSObject
 /*
  | 颜色转换
  */
