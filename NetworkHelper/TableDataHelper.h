@@ -17,6 +17,8 @@
  */
 -(void)downloadData:(NSString *)downloadURLString andParameter:(NSMutableDictionary *)parameters andMethod:(NSString *)method;
 
+-(void)requestByAsync:(NSString *)downloadURLString andParameter:(NSMutableDictionary *)parameters andMethod:(NSString *)method andTag:(NSInteger)requestTag andPassParameter:(NSMutableDictionary *)passParameters;
+
 /*
  |  上传数据+图片
  */

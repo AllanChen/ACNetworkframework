@@ -30,10 +30,23 @@
  |  上传数据
  */
 -(void)uploadDataReturnDic:(NSDictionary *)returnDic;
+
+/*
+ |  上传数据 Tag
+ |  通过Tag来区分每一次的网络请求
+ */
+-(void)uploadDataReturnDic:(NSDictionary *)returnDic andTag:(NSInteger)requestTag andPassParameter:(NSMutableDictionary
+                                                                                                    *)passParameter;
 /*
  | 上传数据失败
  */
 -(void)uploadDataFail:(NSDictionary *)returnDic andError:(NSError *)error;
+
+/*
+ | 上传数据失败 Tag
+ */
+-(void)uploadDataFail:(NSDictionary *)returnDic andError:(NSError *)error andTag:(NSInteger)requestTag andPassParameter:(NSMutableDictionary *)passParameter;
+
 /*
  |  上传数据Progress;
  */
