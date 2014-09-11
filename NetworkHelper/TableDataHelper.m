@@ -1,12 +1,4 @@
-//
-//  TableDataHelper.m
-//  KnowBaby
-//
-//  Created by Allan.Chan on 13-4-7.
-//  Copyright (c) 2013年 Allan. All rights reserved.
-//
-
-#import "TableDataHelper.h"
+mport "TableDataHelper.h"
 #import "LoadingView.h"
 #import "AFNetworking.h"
 
@@ -37,6 +29,16 @@
         else if ([method isEqualToString:@"POST"])
         {
             [manager POST:downloadURLString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.interfaceDelegate uploadDataReturnDic:responseObject andTag:requestTagBlock andPassParameter:passParameters];
+                });
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [self.interfaceDelegate uploadDataFail:[operation responseObject] andError:error andTag:requestTagBlock andPassParameter:passParameter];
+            }];
+        }
+        else if ([method isEqualToString:@"PUT"])
+        {
+            [manager PUT:downloadURLString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.interfaceDelegate uploadDataReturnDic:responseObject andTag:requestTagBlock andPassParameter:passParameters];
                 });
@@ -131,3 +133,4 @@
 
 
 @end
+
