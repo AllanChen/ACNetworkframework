@@ -16,7 +16,6 @@ static LoadingView *_shareLoadingView = nil;
     {
         if (! _shareLoadingView)
         {
-            NSUserDefaults *settingDefaults = [NSUserDefaults standardUserDefaults];
             _shareLoadingView = [[self alloc] init];
             _shareLoadingView.backgroundColor = [UIColor darkGrayColor];
             [_shareLoadingView setBackgroundColor:[[UIColor alloc] initWithRed:(64/255.0) green:(68/255.0) blue:(72/255.0) alpha:0.6]];
@@ -24,7 +23,7 @@ static LoadingView *_shareLoadingView = nil;
             [activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
             [activityIndicatorView startAnimating];
             UILabel *loadingLab = [[UILabel alloc]initWithFrame:CGRectMake(84, 25, 83, 21)];
-            [loadingLab setText:[settingDefaults objectForKey:@"loadingMessage"]];
+            [loadingLab setText:@"请稍后.."];
             [loadingLab setFont:[UIFont systemFontOfSize:17.0]];
             [loadingLab setTextColor:[UIColor whiteColor]];
             [loadingLab setBackgroundColor:[UIColor clearColor]];

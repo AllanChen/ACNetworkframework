@@ -1,4 +1,12 @@
-mport "TableDataHelper.h"
+//
+//  TableDataHelper.m
+//  KnowBaby
+//
+//  Created by Allan.Chan on 13-4-7.
+//  Copyright (c) 2013年 Allan. All rights reserved.
+//
+
+#import "TableDataHelper.h"
 #import "LoadingView.h"
 #import "AFNetworking.h"
 
@@ -16,6 +24,7 @@ mport "TableDataHelper.h"
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
+        
         
         if ([method isEqualToString:@"GET"]){
             [manager GET:downloadURLString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -133,4 +142,3 @@ mport "TableDataHelper.h"
 
 
 @end
-
