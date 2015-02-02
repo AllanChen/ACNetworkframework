@@ -19,9 +19,9 @@
     self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
 }
 
--(void)download:(NSString *)downloadURLStirng andMethod:(NSString *)method andParameter:(NSMutableDictionary *)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure
+-(void)download:(NSString *)downloadURLStirng andMethod:(NSInteger)method andParameter:(NSMutableDictionary *)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure
 {
-    if (method == nil || [method isEqualToString:@"GET"])
+    if (method == ACRequestMethodGet)
     {
         [self.manager GET:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)
@@ -32,7 +32,7 @@
         }];
     }
     
-    if ([method isEqualToString:@"POST"])
+    if (method == ACRequestMethodPost)
     {
         [self.manager POST:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)
@@ -43,7 +43,7 @@
         }];
     }
     
-    if ([method isEqualToString:@"PUT"])
+    if (method == ACRequestMethodPut)
     {
         [self.manager PUT:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)
@@ -54,7 +54,7 @@
         }];
     }
     
-    if ([method isEqualToString:@"DELETE"])
+    if (method == ACRequestMethodDelete)
     {
         [self.manager DELETE:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)

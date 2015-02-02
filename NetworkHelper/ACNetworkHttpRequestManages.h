@@ -9,6 +9,14 @@
 #import "AFNetworking.h"
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger , ACRequestMethod) {
+    ACRequestMethodGet = 0,
+    ACRequestMethodPost,
+    ACRequestMethodHead,
+    ACRequestMethodPut,
+    ACRequestMethodDelete,
+};
+
 @interface ACNetworkHttpRequestManages : AFHTTPRequestOperationManager
 @property(nonatomic,retain) AFHTTPRequestOperationManager *manager;
 @property(nonatomic) NSTimeInterval timeOutInt;
@@ -61,7 +69,7 @@
  *  @param success           成功返回的方法
  *  @param failure           失败返回的方法
  */
--(void)download:(NSString *)downloadURLStirng andMethod:(NSString *)method andParameter:(NSMutableDictionary *)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure;
+-(void)download:(NSString *)downloadURLStirng andMethod:(NSInteger)method andParameter:(NSMutableDictionary *)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure;
 
 
 @end
