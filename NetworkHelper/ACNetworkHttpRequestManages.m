@@ -12,15 +12,19 @@
 @synthesize manager;
 @synthesize timeOutInt;
 
--(void)initHttpRequestManages
-{
+- (void)initHttpRequestManages{
     self.manager = [[AFHTTPRequestOperationManager alloc] init];
+    //self.manager.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:@"text/html", @"text/plain", @"audio/wav", @"text/javascript",nil];
     self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+
 }
 
--(void)download:(NSString *)downloadURLStirng andMethod:(NSInteger)method andParameter:(NSMutableDictionary *)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure
-{
+- (void)download:(NSString *)downloadURLStirng
+       andMethod:(NSInteger)method
+    andParameter:(NSMutableDictionary *)parameters
+andPassParameters:(id)passParameters
+         success:(void (^)(id returnData, id passParameters))success
+         failure:(void (^)(id returnData , NSError *error ,id passParameters))failure{
     if (method == ACRequestMethodGet)
     {
         [self.manager GET:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -66,27 +70,50 @@
     }
 }
 
--(void)setrequestTimeOut:(NSTimeInterval)requestTimeOut
-{
+- (void)upload:(NSString *)uploadURLString
+     andMethod:(NSInteger)method
+  andParameter:(NSMutableDictionary *)parameters
+andPassParameters:(id)passParameters
+  andUpladData:(NSData *)uploadData
+    dataForKey:(NSString *)dataKey
+uploadDatafileName:(NSString *)fileName
+        format:(NSString *)format
+       success:(void (^)(id returnData, id passParameters,id progress))success
+       failure:(void (^)(id returnData , NSError *error ,id passParameters))failure{
+    if(method == ACRequestMethodPost)
+    {
+        //NSData *imageData = UIImageJPEGRepresentation(self.avatarView.image, 0.5);
+        AFHTTPRequestOperation *op = [manager POST:uploadURLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileData:uploadData name:dataKey fileName:fileName mimeType:format];
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            //NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
+            success(responseObject,passParameters,operation.responseString);
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            //NSLog(@"Error: %@ ***** %@", operation.responseString, error);
+            failure(operation.responseObject,error,passParameters);
+        }];
+        [op start];
+        
+    }
+}
+
+- (void)setrequestTimeOut:(NSTimeInterval)requestTimeOut{
     [self.manager.requestSerializer setTimeoutInterval:requestTimeOut];
 }
 
--(void)setHeaderValue:(NSString *)key andValue:(NSString *)value
-{
-    
+- (void)setHeaderValue:(NSString *)key andValue:(NSString *)value{
     [self.manager.requestSerializer setValue:value forHTTPHeaderField:key];
 }
 
--(void)setHeaderByArray:(NSArray *)keys andValues:(NSArray *)values
-{
+- (void)setHeaderByArray:(NSArray *)keys andValues:(NSArray *)values{
     for (int i=0; i<keys.count; i++)
     {
         [self.manager.requestSerializer setValue:[values objectAtIndex:i] forKey:[keys objectAtIndex:i]];
     }
 }
 
--(void)networkState:(void (^)(NSString *))state
-{
+- (void)networkState:(void (^)(NSString *))state{
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         switch (status) {
             case AFNetworkReachabilityStatusNotReachable:
