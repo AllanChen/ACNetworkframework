@@ -14,17 +14,17 @@
 
 - (void)initHttpRequestManages{
     self.manager = [[AFHTTPRequestOperationManager alloc] init];
-    //self.manager.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:@"text/html", @"text/plain", @"audio/wav", @"text/javascript",nil];
     self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
 }
 
 - (void)download:(NSString *)downloadURLStirng
        andMethod:(NSInteger)method
-    andParameter:(NSMutableDictionary *)parameters
+    andParameter:(id)parameters
 andPassParameters:(id)passParameters
          success:(void (^)(id returnData, id passParameters))success
          failure:(void (^)(id returnData , NSError *error ,id passParameters))failure{
+    self.manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     if (method == ACRequestMethodGet)
     {
         [self.manager GET:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -72,7 +72,7 @@ andPassParameters:(id)passParameters
 
 - (void)upload:(NSString *)uploadURLString
      andMethod:(NSInteger)method
-  andParameter:(NSMutableDictionary *)parameters
+  andParameter:(id)parameters
 andPassParameters:(id)passParameters
   andUpladData:(NSData *)uploadData
     dataForKey:(NSString *)dataKey

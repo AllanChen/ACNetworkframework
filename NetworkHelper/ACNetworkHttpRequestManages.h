@@ -69,10 +69,10 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param success           成功返回的方法
  *  @param failure           失败返回的方法
  */
-- (void)download:(NSString *)downloadURLStirng andMethod:(NSInteger)method andParameter:(NSMutableDictionary *)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure;
+- (void)download:(NSString *)downloadURLStirng andMethod:(NSInteger)method andParameter:(id)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure;
 
 
-- (void)upload:(NSString *)uploadURLString andMethod:(NSInteger)method andParameter:(NSMutableDictionary *)parameters andPassParameters:(id)passParameters andUpladData:(NSData *)uploadData dataForKey:(NSString *)dataKey uploadDatafileName:(NSString *)fileName format:(NSString *)format
+- (void)upload:(NSString *)uploadURLString andMethod:(NSInteger)method andParameter:(id)parameters andPassParameters:(id)passParameters andUpladData:(NSData *)uploadData dataForKey:(NSString *)dataKey uploadDatafileName:(NSString *)fileName format:(NSString *)format
        success:(void (^)(id returnData, id passParameters,id progress))success
        failure:(void (^)(id returnData , NSError *error ,id passParameters))failure;
 
