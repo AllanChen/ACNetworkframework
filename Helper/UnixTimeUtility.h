@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @interface UnixTimeUtility : NSObject
 +(float)nowUnixTime;
 +(NSString *)getNowTime;
@@ -32,4 +31,5 @@
 + (NSDate *)dateFromString:(NSString *)dateString;
 
 + (NSString *)stringFromDate:(NSDate *)date;
+
 @end
