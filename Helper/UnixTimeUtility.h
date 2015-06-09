@@ -10,9 +10,8 @@
 @interface UnixTimeUtility : NSObject
 +(float)nowUnixTime;
 +(NSString *)getNowTime;
-+(NSString *)transformUnixTime:(double)time;
 +(NSString *)transformUnixTimeHoursAndMin:(double)time;
-
++(NSString *)transformUnixTime:(double)time andTimeFormat:(NSString *)timeFromat;
 /*
  | bosim 比较当前月和指定月的差值
  */

@@ -33,13 +33,13 @@ static NSDateFormatter *dateFormtter;
 /*
  |  UnixTime 时间转换
  */
-+(NSString *)transformUnixTime:(double)time
++(NSString *)transformUnixTime:(double)time andTimeFormat:(NSString *)timeFromat
 {
     NSTimeInterval _interval = time;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
     NSDateFormatter *_formatter = [[NSDateFormatter alloc]init];
     [_formatter setLocale:[NSLocale currentLocale]];
-    [_formatter setDateFormat:@"yyyy-MM-dd H:m:s"];
+    [_formatter setDateFormat:timeFromat];
     NSString *dateString = [_formatter stringFromDate:date];
     return dateString;
 }
