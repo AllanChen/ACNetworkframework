@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
 
 @interface UIViewController (Helper)<UIGestureRecognizerDelegate>
 
@@ -15,7 +14,7 @@
 -(void)removeLoading;
 -(void)showLoadingWithMessage:(NSString *)msg;
 -(void)addSwipeBack:(UIViewController *)inputViewController;
--(void)noDatabackImageView:(NSString *)imageName
+-(void)noDatabackImageView:(NSString *)imageName;
 -(void)noDatabackImageViewShow;
 -(void)noDatabackImageViewHiden;
 
