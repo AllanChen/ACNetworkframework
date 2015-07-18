@@ -465,4 +465,8 @@
 
 }
 
++(NSString *)trimDoubleQuotesAndSiglelQuotes:(NSString *)filterString andInputString:(NSMutableString *)inputString {
+    return [inputString stringByReplacingOccurrencesOfString:@"\"" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [inputString length])];
+}
+
 @end

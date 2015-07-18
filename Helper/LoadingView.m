@@ -40,7 +40,7 @@ static LoadingView *_shareLoadingView = nil;
 
 -(void)shareLoadingViewFrame
 {
-    _shareLoadingView.frame = CGRectMake(60, 205, 200, 70);
+    _shareLoadingView.frame = CGRectMake([[UIScreen mainScreen] bounds].size.width/2-100, [[UIScreen mainScreen] bounds].size.height/2-35, 200, 70);
 }
 
 -(void)setMessage:(NSString *)message

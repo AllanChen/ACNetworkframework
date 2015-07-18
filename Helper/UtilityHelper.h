@@ -78,9 +78,14 @@
 
 
 /*
- |  过滤字符
+ |  过滤空白字符
  */
 +(NSString *)trimString:(NSString *)inputString;
+
+/*
+ |  过滤双引号和单引号
+ */
++(NSString *)trimDoubleQuotesAndSiglelQuotes:(NSString *)filterString andInputString:(NSString *)inputString;
 
 /*
  |  转义表情To Server
@@ -107,5 +112,6 @@
 +(NSString *)getCurrentTime;
 
 +(NSString *)getFloder:(NSString *)folderName;
+
 
 @end
