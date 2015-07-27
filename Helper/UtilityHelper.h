@@ -50,12 +50,6 @@
 +(NSInteger)countArrayItemSum:(NSArray *)inputArray andInputString :(NSString *)inputString;
 
 /*
- |  消除数组里面重复的item
- */
-+(NSMutableArray *)uniqueSameItem:(NSArray*)inputArray;
-
-
-/*
  | 转换并压缩图片
  */
 +(NSData *)coverImageToNSData:(UIImage *)lagerImage andOutputFromat:(NSString *)fromat;
@@ -101,10 +95,6 @@
 
 +(void)shakeAnimation:(UIView *)shakeView;
 
-/*
- | 字典或数组转化为JSON格式字符串
- */
-+(NSString *)dictionaryAndArrayToJsonString:(id)dictionaryOrArray;
 
 /*
  |  获取当前时间

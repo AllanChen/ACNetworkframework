@@ -15,7 +15,10 @@
 - (void)initHttpRequestManages{
     self.manager = [[AFHTTPRequestOperationManager alloc] init];
     self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+}
 
+- (void)setHttps {
+    self.manager.securityPolicy.allowInvalidCertificates = YES;
 }
 
 - (void)download:(NSString *)downloadURLStirng
@@ -132,4 +135,6 @@ uploadDatafileName:(NSString *)fileName
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
+
+
 @end

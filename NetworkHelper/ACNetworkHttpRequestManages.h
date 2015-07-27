@@ -18,12 +18,14 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
 };
 
 @interface ACNetworkHttpRequestManages : AFHTTPRequestOperationManager
-@property(nonatomic,retain) AFHTTPRequestOperationManager *manager;
+@property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic) NSTimeInterval timeOutInt;
 
 
 
 - (void)initHttpRequestManages;
+
+- (void)setHttps;
 
 /**
  *  检查网络情况

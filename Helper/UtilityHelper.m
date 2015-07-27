@@ -146,32 +146,10 @@
         occurrenes += ([string isEqualToString:inputString]);
     }
     return occurrenes;
-    /*
-     for (int i=0; i<[inputArray count]; i++)
-     {
-     NSString *item = [inputArray objectAtIndex:i];
-     for (item in inputArray)
-     {
-     occurrenes += ([item isEqualToString:[inputArray objectAtIndex:i]]?1:0);
-     }
-     }
-     */
-    
 }
 
 
-+(NSMutableArray *)uniqueSameItem:(NSArray*)inputArray
-{
-    NSMutableArray *combination = [[NSMutableArray alloc] init];
-    for (id obj in inputArray)
-    {
-        if (![combination containsObject:obj])
-        {
-            [combination addObject: obj];
-        }
-    }
-    return combination;
-}
+
 
 +(NSData *)coverImageToNSData:(UIImage *)lagerImage andOutputFromat:(NSString *)fromat
 {
@@ -390,23 +368,6 @@
     return returnValue;
 }
 
-+(NSString *)dictionaryAndArrayToJsonString:(id)dictionaryOrArray
-{
-    NSString *jsonString;
-    NSError *error = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionaryOrArray
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&error];
-    if ([jsonData length] > 0 && error == nil)
-    {
-        return  jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];;
-    }
-    
-    else
-    {
-        return @"{\"error\":\"null\"}";
-    }
-}
 
 +(void)shakeAnimation:(UIView *)shakeView
 {
