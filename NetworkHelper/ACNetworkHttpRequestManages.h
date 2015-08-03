@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 ChanAllan. All rights reserved.
 //
 
+#error IF YOUR NEED SSL TAKE THE OPENSSL YES
+#define OPENSSL YES
+
 #import "AFNetworking.h"
 #import <Foundation/Foundation.h>
-
 typedef NS_ENUM(NSInteger , ACRequestMethod) {
     ACRequestMethodGet = 0,
     ACRequestMethodPost,
@@ -16,6 +18,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
     ACRequestMethodPut,
     ACRequestMethodDelete,
 };
+
 
 @interface ACNetworkHttpRequestManages : AFHTTPRequestOperationManager
 @property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
@@ -25,7 +28,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
 
 - (void)initHttpRequestManages;
 
-- (void)setHttps;
+
 
 /**
  *  检查网络情况

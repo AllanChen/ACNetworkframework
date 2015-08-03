@@ -15,11 +15,9 @@
 - (void)initHttpRequestManages{
     self.manager = [[AFHTTPRequestOperationManager alloc] init];
     self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    self.manager.securityPolicy.allowInvalidCertificates = OPENSSL;
 }
 
-- (void)setHttps {
-    self.manager.securityPolicy.allowInvalidCertificates = YES;
-}
 
 - (void)download:(NSString *)downloadURLStirng
        andMethod:(NSInteger)method
