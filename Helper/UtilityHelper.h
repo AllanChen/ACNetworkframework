@@ -12,96 +12,96 @@
 /*
  | 颜色转换
  */
-+(UIColor *)colorWithHexString:(NSString*)hex;
++ (UIColor *)colorWithHexString:(NSString*)hex;
 /*
  | MD5 加密
  */
-+(NSString *)md5:(NSString *)inputString;
++ (NSString *)md5:(NSString *)inputString;
 
-+(void)showAlertView:(NSString *)alertViewTitle andMessage:(NSString *)alertMessage andCancelBtnTitle:(NSString *)cancelBtnTitle;
++ (void)showAlertView:(NSString *)alertViewTitle andMessage:(NSString *)alertMessage andCancelBtnTitle:(NSString *)cancelBtnTitle;
 
 /*
  | 转换成字符串
  */
-+(NSString *)convertToString:(id)inputData;
++ (NSString *)convertToString:(id)inputData;
 /*
  |  邮箱认证
  */
-+(BOOL)isValidateEmail:(NSString *)email;
++ (BOOL)isValidateEmail:(NSString *)email;
 /*
  | URL uncode
  */
-+ (NSString*)encodeURL:(NSString *)string;
++  (NSString*)encodeURL:(NSString *)string;
 
 /*
  | 快递验证
  */
-+(BOOL)isExpress:(NSString *)expressString;
++ (BOOL)isExpress:(NSString *)expressString;
 
 /*
  |  过滤HTML标签
  */
-+ (NSString *)flattenHTML:(NSString *)html;
++  (NSString *)flattenHTML:(NSString *)html;
 
 /*
  |  统计数组item出现的次数
  */
 
-+(NSInteger)countArrayItemSum:(NSArray *)inputArray andInputString :(NSString *)inputString;
++ (NSInteger)countArrayItemSum:(NSArray *)inputArray andInputString :(NSString *)inputString;
 
 /*
  | 转换并压缩图片
  */
-+(NSData *)coverImageToNSData:(UIImage *)lagerImage andOutputFromat:(NSString *)fromat;
++ (NSData *)coverImageToNSData:(UIImage *)lagerImage andOutputFromat:(NSString *)fromat;
 
 /*
  |  将字典转化成JSON字符串
  */
-+(NSString *)convertDicToJsonString :(NSMutableDictionary *)inputDic;
++ (NSString *)convertDicToJsonString :(NSMutableDictionary *)inputDic;
 
 
 /*
  |  将图片旋转
  */
-+(UIImage *)scaleAndRotateImage:(UIImage *)image;
++ (UIImage *)scaleAndRotateImage:(UIImage *)image;
 
 /*
  | 图片圆角
  */
-+(id)cutTheImageViewRadius:(id)inputImageView;
++ (id)cutTheImageViewRadius:(id)inputImageView;
 
 
 /*
  |  过滤空白字符
  */
-+(NSString *)trimString:(NSString *)inputString;
++ (NSString *)trimString:(NSString *)inputString;
 
 /*
  |  过滤双引号和单引号
  */
-+(NSString *)trimDoubleQuotesAndSiglelQuotes:(NSString *)filterString andInputString:(NSString *)inputString;
++ (NSString *)trimDoubleQuotesAndSiglelQuotes:(NSString *)filterString andInputString:(NSString *)inputString;
 
 /*
  |  转义表情To Server
  */
-+(NSString *)emotionString:(NSString *)inputEmotionString;
++ (NSString *)emotionString:(NSString *)inputEmotionString;
 
 /*
  | 转义表情To LocalTB
  */
-+(NSString *)emotionDataEncode:(NSString *)inputEmotionString;
++ (NSString *)emotionDataEncode:(NSString *)inputEmotionString;
 
-+ (BOOL)stringContainsEmoji:(NSString *)string;
++  (BOOL)stringContainsEmoji:(NSString *)string;
 
-+(void)shakeAnimation:(UIView *)shakeView;
++ (void)shakeAnimation:(UIView *)shakeView;
 
 
 /*
  |  获取当前时间
  */
-+(NSString *)getCurrentTime;
++ (NSString *)getCurrentTime;
 
-+(NSString *)getFloder:(NSString *)folderName;
++ (NSString *)getFloder:(NSString *)folderName;
 
-
++ (NSString *)returnRandomString;
 @end

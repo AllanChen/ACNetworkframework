@@ -430,4 +430,19 @@
     return [inputString stringByReplacingOccurrencesOfString:@"\"" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [inputString length])];
 }
 
++(NSString *)trimDoubleQuotesAndSiglelQuotes:(NSString *)filterString andInputString:(NSMutableString *)inputString {
+    return [inputString stringByReplacingOccurrencesOfString:@"\"" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [inputString length])];
+}
+
++ (NSString *)returnRandomString {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    int len = [letters length];
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+    }
+    
+    return randomString;
+}
+
 @end
