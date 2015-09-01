@@ -7,17 +7,22 @@
 //
 
 #import "ReadAndWriteDataHelper.h"
+typedef NS_ENUM(NSUInteger, FolderName) {
+    kDocuments = 0,
+    kCaches,
+    kTemp
+};
 
 @implementation ReadAndWriteDataHelper
 
-+(NSMutableArray *)readDataFromDocument:(NSString *)fileName andFolderName:(NSString *)folderName
++ (NSMutableArray *)readDataFromDocument:(NSString *)fileName andFolderName:(NSString *)folderName
 {
     NSString *cacheDocument = [self getFloder:folderName];
     NSString *cachePath = [cacheDocument stringByAppendingPathComponent:fileName];
     return [NSMutableArray arrayWithContentsOfFile:cachePath];
 }
 
-+(BOOL)saveDataToCaches:(id)data andFileName:(NSString *)fileName andFolderName:(NSString *)folderName
++ (BOOL)saveDataToCaches:(id)data andFileName:(NSString *)fileName andFolderName:(NSString *)folderName
 {
     NSString *dirPath = [self getFloder:folderName];
     NSString *writePath = [dirPath stringByAppendingPathComponent:fileName];
@@ -28,11 +33,7 @@
     return [favDataFromCache writeToFile:data atomically:YES];
 }
 
-
-/**
- *  复制文件到缓存目录下
- */
-+(void)copyFile:(NSString *)fileName andFileType:(NSString *)fileType andFolderName:(NSString *)folderName
++ (void)copyFile:(NSString *)fileName andFileType:(NSString *)fileType andFolderName:(NSString *)folderName
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *txtPath = [[ReadAndWriteDataHelper getFloder:folderName] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.%@",fileName,fileType]];
@@ -41,11 +42,7 @@
     [fileManager copyItemAtPath:resourcePath toPath:txtPath error:nil];
 }
 
-/**
- *  判断文件是否存在缓存
- *  @return Bool
- */
-+(BOOL)fileExists:(NSString *)folderName andFileName:(NSString *)fileName
++ (BOOL)fileExists:(NSString *)folderName andFileName:(NSString *)fileName
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *fullPath = [[self getFloder:folderName] stringByAppendingPathComponent:fileName];
@@ -56,7 +53,7 @@
 /*
  |  判断同样Barcode 是否存在
  */
-+(BOOL)dataExistCaches:(NSString *)barcode andFileName:(NSString *)fileName;
++ (BOOL)dataExistCaches:(NSString *)barcode andFileName:(NSString *)fileName;
 {
     BOOL isExist  = FALSE;
     NSString *dirPath =[self getFloder:@"Caches"];
@@ -81,7 +78,7 @@
     return isExist;
 }
 
-+(BOOL)clearFile:(NSString *)fileName andFolder:(NSString *)folderName
++ (BOOL)clearFolder:(NSString *)folderName andFile:(NSString *)fileName
 {
     NSString *dirPath = [self getFloder:folderName];
     NSString *writePath = [dirPath stringByAppendingPathComponent:fileName];
@@ -89,26 +86,32 @@
     return [favDataFromCache writeToFile:nil atomically:YES];
 }
 
-/**
- *  切换到存入的文件夹目录下
- */
-+(NSString *)getFloder:(NSString *)folderName
++ (BOOL)deleteFileFromFolder:(NSString *)folderName andFileName:(NSString *)fileName{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [folderName stringByAppendingPathComponent:fileName];
+    NSError *error;
+    BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+    if (success) {
+        return TRUE;
+    }
+    else
+    {
+        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+        return FALSE;
+    }
+}
+
++ (NSString *)getFloder:(NSString *)folderName
 {
-    
-    /*
-     |  Document
-     */
+    //Document
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     if ([folderName isEqualToString:@"Documents"]) {
         NSString *folder = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         return folder;
-        folder = nil;
     }
     
-    /*
-     | Caches
-     */
+    //Caches
     else if ([folderName isEqualToString:@"Caches"])
     {
         NSArray *cacPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -123,5 +126,25 @@
         folder = nil;
     }
     paths = nil;
+}
+
++  (NSURL *)getFileFromSandboxWithFolderName:(NSString *)folderName andFileName:(NSString *)fileName{
+    NSString *documentsDirectory = [self getFloder:folderName];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    return [NSURL fileURLWithPath:filePath];
+}
+
++ (BOOL) createFolderOnSandBox:(NSString *)rootFolderName andFolderName:(NSString *)inputFolderName{
+    NSError *error;
+    NSString *documentsDirectory = [self getFloder:rootFolderName];
+    NSString *folderName = [[NSString alloc] initWithFormat:@"/%@",inputFolderName];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:folderName];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]){
+        BOOL createStatus = [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error];
+        return (createStatus)?YES:NO;
+    }
+    else{
+        return YES;
+    }
 }
 @end
