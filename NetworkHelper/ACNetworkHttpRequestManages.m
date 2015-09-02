@@ -7,6 +7,7 @@
 //
 
 #import "ACNetworkHttpRequestManages.h"
+#import "AFSecurityPolicy.h"
 
 @implementation ACNetworkHttpRequestManages
 @synthesize manager;
@@ -15,7 +16,29 @@
 - (void)initHttpRequestManages{
     self.manager = [[AFHTTPRequestOperationManager alloc] init];
     self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    self.manager.securityPolicy.allowInvalidCertificates = OPENSSL;
+    if (OPENSSL) {
+        self.manager.securityPolicy = [self setupSecurity];
+    }
+}
+
+- (AFSecurityPolicy *)setupSecurity{
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+    [securityPolicy setAllowInvalidCertificates:YES];
+    return securityPolicy;
+}
+
+- (AFSecurityPolicy*)customSecurityPolicy
+{
+    /**** SSL Pinning ****/
+    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"apache2" ofType:@"cer"];
+    NSData *certData = [NSData dataWithContentsOfFile:cerPath];
+    AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
+    [securityPolicy setAllowInvalidCertificates:NO];
+    [securityPolicy setPinnedCertificates:@[certData]];
+    //[securityPolicy setSSLPinningMode:AFSSLPinningModeCertificate];
+    /**** SSL Pinning ****/
+    
+    return securityPolicy;
 }
 
 
