@@ -430,7 +430,7 @@
     return [inputString stringByReplacingOccurrencesOfString:@"\"" withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [inputString length])];
 }
 
-+ (NSString *)returnRandomString {
++ (NSString *)randomString {
     NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     int len = [letters length];
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];

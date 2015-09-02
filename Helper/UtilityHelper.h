@@ -103,5 +103,5 @@
 
 + (NSString *)getFloder:(NSString *)folderName;
 
-+ (NSString *)returnRandomString;
++ (NSString *)randomString;
 @end
