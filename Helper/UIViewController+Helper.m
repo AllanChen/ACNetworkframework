@@ -22,8 +22,24 @@
     [[LoadingView shareLoadingView] shareLoadingViewFrame];
     [[LoadingView shareLoadingView] setMessage:msg];
     [self.view addSubview:[LoadingView shareLoadingView]];
-    
 }
+
+- (void)showLoadingOnWindow{
+    [[LoadingView shareLoadingView] setLoadingViewAlpha:1.0];
+    [[LoadingView shareLoadingView] shareLoadingViewFrame];
+    [[LoadingView shareLoadingView] setMessage:@"请稍后.."];
+    [[UIApplication sharedApplication].keyWindow addSubview:[LoadingView shareLoadingView]];
+}
+
+- (void)showLoadingOnWindowWithMsg:(NSString *)msg{
+    [[LoadingView shareLoadingView] setLoadingViewAlpha:1.0];
+    [[LoadingView shareLoadingView] shareLoadingViewFrame];
+    [[LoadingView shareLoadingView] setMessage:msg];
+    [[UIApplication sharedApplication].keyWindow addSubview:[LoadingView shareLoadingView]];
+}
+
+
+
 -(void)removeLoading
 {
     [UIView animateWithDuration:0.4 animations:^{
@@ -51,22 +67,22 @@
     UIImageView *nodataImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     [nodataImageView setTag:100000];
     NSLayoutConstraint *POS_H = [NSLayoutConstraint
-                                constraintWithItem:nodataImageView
-                                attribute:NSLayoutAttributeCenterX
-                                relatedBy:NSLayoutRelationEqual
-                                toItem:self.view
-                                attribute:NSLayoutAttributeCenterX
-                                multiplier:1
-                                constant:0];
+                                 constraintWithItem:nodataImageView
+                                 attribute:NSLayoutAttributeCenterX
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.view
+                                 attribute:NSLayoutAttributeCenterX
+                                 multiplier:1
+                                 constant:0];
     
     NSLayoutConstraint *POS_V = [NSLayoutConstraint
-                                constraintWithItem:nodataImageView
-                                attribute:NSLayoutAttributeCenterY
-                                relatedBy:NSLayoutRelationEqual
-                                toItem:self.view
-                                attribute:NSLayoutAttributeCenterY
-                                multiplier:1
-                                constant:0];
+                                 constraintWithItem:nodataImageView
+                                 attribute:NSLayoutAttributeCenterY
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.view
+                                 attribute:NSLayoutAttributeCenterY
+                                 multiplier:1
+                                 constant:0];
     [nodataImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
     NSArray *constraints = @[POS_H,POS_V];
