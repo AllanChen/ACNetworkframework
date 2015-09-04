@@ -8,14 +8,22 @@
 
 #import <Foundation/Foundation.h>
 @interface UnixTimeUtility : NSObject
-+(float)nowUnixTime;
-+(NSString *)getNowTime;
-+(NSString *)transformUnixTimeHoursAndMin:(double)time;
-+(NSString *)transformUnixTime:(double)time andTimeFormat:(NSString *)timeFromat;
+/**
+ *  获取当前时间
+ *
+ *  @return 返回UnixTime
+ */
++ (float)nowUnixTime;
+
++ (NSString *)getNowTime;
+
++ (NSString *)transformUnixTimeHoursAndMin:(double)time;
+
++ (NSString *)transformUnixTime:(double)time andTimeFormat:(NSString *)timeFromat;
 /*
  | bosim 比较当前月和指定月的差值
  */
-+(int)compareDateValue:(NSString *) oneDay withAnotherDay:(NSString *)anotherDay;
++ (int)compareDateValue:(NSString *) oneDay withAnotherDay:(NSString *)anotherDay;
 
 /*
  | 比较两个时间，返回时间的差值
@@ -30,5 +38,15 @@
 + (NSDate *)dateFromString:(NSString *)dateString;
 
 + (NSString *)stringFromDate:(NSDate *)date;
+
+/**
+ *  返回时分秒正确格式
+ *
+ *  @param totalSeconds 总秒数
+ *  @param returnType   返回类型，1:只返回秒 2：返回分，秒 3：返回时分秒
+ *
+ *  @return 返回时分秒格式
+ */
++ (NSString *)timeFormatted:(int)totalSeconds andReturnType:(int)returnType;
 
 @end

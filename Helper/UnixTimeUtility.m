@@ -10,13 +10,13 @@
 static NSDateFormatter *dateFormtter;
 @implementation UnixTimeUtility
 
-+(float)nowUnixTime
++ (float)nowUnixTime
 {
     NSTimeInterval nowTimeUnix=[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970]*1000;
     return  nowTimeUnix;
 }
 
-+(NSString *)getNowTime
++ (NSString *)getNowTime
 {
     NSString *timeFormtter;
     if (!dateFormtter)
@@ -33,7 +33,7 @@ static NSDateFormatter *dateFormtter;
 /*
  |  UnixTime 时间转换
  */
-+(NSString *)transformUnixTime:(double)time andTimeFormat:(NSString *)timeFromat
++ (NSString *)transformUnixTime:(double)time andTimeFormat:(NSString *)timeFromat
 {
     NSTimeInterval _interval = time;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
@@ -44,7 +44,7 @@ static NSDateFormatter *dateFormtter;
     return dateString;
 }
 
-+(NSString *)transformUnixTimeHoursAndMin:(double)time
++ (NSString *)transformUnixTimeHoursAndMin:(double)time
 {
     NSTimeInterval _interval = time;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
@@ -55,7 +55,7 @@ static NSDateFormatter *dateFormtter;
     return dateString;
 }
 
-+(int)compareDateValue:(NSString *) oneDay withAnotherDay:(NSString *)anotherDay
++ (int)compareDateValue:(NSString *) oneDay withAnotherDay:(NSString *)anotherDay
 {
     int result = [oneDay intValue] - [anotherDay intValue];
     if (result < 0 )
@@ -113,14 +113,32 @@ static NSDateFormatter *dateFormtter;
 
 + (NSString *)stringFromDate:(NSDate *)date
 {
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
     NSString *destDateString = [dateFormatter stringFromDate:date];
-    
     return destDateString;
-    
 }
+
++ (NSString *)timeFormatted:(int)totalSeconds andReturnType:(int)returnType {
+    
+    int seconds = totalSeconds % 60;
+    int minutes = (totalSeconds / 60) % 60;
+    int hours = totalSeconds / 3600;
+    switch (returnType) {
+        case 1:
+                return [NSString stringWithFormat:@"%02d",seconds];
+            break;
+        
+            case 2:
+                return [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            break;
+            
+        default:
+                return [NSString stringWithFormat:@"%02d:%02d:%02d",hours, minutes, seconds];
+            break;
+    }
+    
+
+}
+
 @end
