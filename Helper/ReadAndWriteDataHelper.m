@@ -88,7 +88,8 @@ typedef NS_ENUM(NSUInteger, FolderName) {
 
 + (BOOL)deleteFileFromFolder:(NSString *)folderName andFileName:(NSString *)fileName{
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *filePath = [folderName stringByAppendingPathComponent:fileName];
+    NSString *folderPath = [self getFloder:folderName];
+    NSString *filePath = [folderPath stringByAppendingPathComponent:fileName];
     NSError *error;
     BOOL success = [fileManager removeItemAtPath:filePath error:&error];
     if (success) {
