@@ -173,6 +173,16 @@
     return jsonString;
 }
 
++ (NSString *)convertArrayToJsonString:(id)inputArray{
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:inputArray
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonString;
+}
+
+
 + (UIImage *)scaleAndRotateImage:(UIImage *)image {
     
     int kMaxResolution = 640; // Or whatever

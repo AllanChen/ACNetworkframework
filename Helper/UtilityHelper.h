@@ -59,6 +59,10 @@
  */
 + (NSString *)convertDicToJsonString :(NSMutableDictionary *)inputDic;
 
+/*
+ |  将数组变成JSON字符串
+ */
++ (NSString *)convertArrayToJsonString:(id)inputArray;
 
 /*
  |  将图片旋转
@@ -104,4 +108,5 @@
 + (NSString *)getFloder:(NSString *)folderName;
 
 + (NSString *)randomString;
+
 @end
