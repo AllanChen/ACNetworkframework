@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 ChanAllan. All rights reserved.
 //
 
-#error IF YOUR NEED SSL TAKE THE OPENSSL YES
-#define OPENSSL YES
+
+define OPENSSL NO
 
 #import "AFNetworking.h"
 #import <Foundation/Foundation.h>
