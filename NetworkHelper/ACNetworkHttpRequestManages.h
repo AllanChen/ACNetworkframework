@@ -7,7 +7,7 @@
 //
 
 
-define OPENSSL NO
+#define OPENSSL NO
 
 #import "AFNetworking.h"
 #import <Foundation/Foundation.h>
