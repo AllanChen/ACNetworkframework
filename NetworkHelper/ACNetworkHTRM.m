@@ -43,6 +43,25 @@
     
 }
 
+- (AFJSONRequestSerializer *)setRequestSerializer{
+    [AFJSONRequestSerializer serializer];
+}
+
+- (void)setRequestTimeOut:(AFJSONRequestSerializer *)manager
+{
+    
+}
+
+- (void)setHeaderValue:(AFJSONRequestSerializer *)manager
+{
+    
+}
+
+- (void)setHeaderByArray:(AFJSONRequestSerializer *)manager
+{
+    
+}
+
 - (void)downloadMethod:(NSInteger)method
      andPassParameters:(id)passParameters
          success:(void (^)(id returnData, id passParameters))success
@@ -52,8 +71,7 @@
     self.params = [self parametersMap];
     NSString *path = [self.requestURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.requestSerializer = [self setRequestSerializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
     if (method == ACRequestMethodGet)
     {
@@ -128,20 +146,6 @@ uploadDatafileName:(NSString *)fileName
     }
 }
 
-- (void)setrequestTimeOut:(NSTimeInterval)requestTimeOut
-{
-    
-}
-
-- (void)setHeaderValue:(NSString *)key andValue:(NSString *)value
-{
-
-}
-
-- (void)setHeaderByArray:(NSArray *)keys andValues:(NSArray *)values
-{
-    
-}
 
 - (void)networkState:(void (^)(NSString *))state{
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {

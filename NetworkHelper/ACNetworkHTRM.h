@@ -21,8 +21,6 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
 };
 
 @interface ACNetworkHTRM:NSObject
-
-@property(nonatomic) NSTimeInterval timeOutInt;
 @property (nonatomic, strong) NSString *domainName;
 @property (nonatomic, strong) NSString *requestURL;
 @property (nonatomic, strong) NSDictionary *params;
@@ -43,7 +41,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param requestTimeOut 过期时间，以秒为单位
  */
 
-- (void)setrequestTimeOut:(NSTimeInterval)requestTimeOut;
+- (void)setRequestTimeOut:(AFHTTPRequestOperationManager *)manager;
 
 /**
  *  设置HTTP Header
@@ -52,7 +50,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param value Value For Header
  */
 
-- (void)setHeaderValue:(NSString *)key andValue:(NSString *)value;
+- (void)setHeaderValue:(AFHTTPRequestOperationManager *)manager;
 
 
 /**
@@ -61,7 +59,8 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param key   Keys For Header - -
  *  @param value Values For Header
  */
-- (void)setHeaderByArray:(NSArray *)keys andValues:(NSArray *)values;
+- (void)setHeaderByArray:(AFHTTPRequestOperationManager *)manager;
+
 
 /**
  *  构建URL
@@ -77,6 +76,12 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  构建请求参数
  */
 - (NSDictionary *)buildParameters;
+
+/**
+ *  设置post 参数类型
+ *
+ */
+- (AFJSONRequestSerializer *)setRequestSerializer;
 
 
 /**
