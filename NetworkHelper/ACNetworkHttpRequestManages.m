@@ -41,6 +41,27 @@
     return securityPolicy;
 }
 
+- (NSDictionary *)parametersMap
+{
+    return nil;
+}
+
+- (void)setRequestURL{
+
+}
+
+- (NSDictionary *)buildParameters
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSDictionary *maps = [self parametersMap];
+    for (NSString *key in maps.allKeys) {
+        id val = [self valueForKey:key];
+        if (val) {
+            [params setObject:val forKey:maps[key]];
+        }
+    }
+    return [NSDictionary dictionaryWithDictionary:params];
+}
 
 - (void)download:(NSString *)downloadURLStirng
        andMethod:(NSInteger)method
@@ -49,9 +70,13 @@ andPassParameters:(id)passParameters
          success:(void (^)(id returnData, id passParameters))success
          failure:(void (^)(id returnData , NSError *error ,id passParameters))failure{
     self.manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    NSString *path = [self.path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
+    
     if (method == ACRequestMethodGet)
     {
-        [self.manager GET:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.manager GET:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)
                 success(responseObject,passParameters);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -62,7 +87,7 @@ andPassParameters:(id)passParameters
     
     if (method == ACRequestMethodPost)
     {
-        [self.manager POST:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.manager POST:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)
                 success(responseObject,passParameters);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -73,7 +98,7 @@ andPassParameters:(id)passParameters
     
     if (method == ACRequestMethodPut)
     {
-        [self.manager PUT:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.manager PUT:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)
                 success(responseObject,passParameters);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -84,7 +109,7 @@ andPassParameters:(id)passParameters
     
     if (method == ACRequestMethodDelete)
     {
-        [self.manager DELETE:downloadURLStirng parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.manager DELETE:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if (success)
                 success(responseObject,passParameters);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
