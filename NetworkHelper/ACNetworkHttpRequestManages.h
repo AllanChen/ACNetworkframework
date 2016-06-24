@@ -23,12 +23,13 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
 @interface ACNetworkHttpRequestManages : AFHTTPRequestOperationManager
 @property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic) NSTimeInterval timeOutInt;
+@property (nonatomic, strong) NSString *domainName;
+@property (nonatomic, strong) NSString *path;
+@property (nonatomic, strong) NSDictionary *params;
 
 
 
 - (void)initHttpRequestManages;
-
-
 
 /**
  *  检查网络情况
@@ -63,6 +64,22 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param value Values For Header
  */
 - (void)setHeaderByArray:(NSArray *)keys andValues:(NSArray *)values;
+
+/**
+ *  构建URL
+ */
+- (void)setRequestURL;
+
+/**
+ *  Map请求参数
+ */
+- (NSDictionary *)parametersMap;
+
+/**
+ *  构建请求参数
+ */
+- (NSDictionary *)buildParameters;
+
 
 /**
  *  下载数据接口
