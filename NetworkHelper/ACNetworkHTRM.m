@@ -43,28 +43,17 @@
     
 }
 
-- (NSDictionary *)buildParameters
-{
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    NSDictionary *maps = [self parametersMap];
-    for (NSString *key in maps.allKeys) {
-        id val = [self valueForKey:key];
-        if (val) {
-            [params setObject:val forKey:maps[key]];
-        }
-    }
-    return [NSDictionary dictionaryWithDictionary:params];
-}
-
 - (void)downloadMethod:(NSInteger)method
      andPassParameters:(id)passParameters
          success:(void (^)(id returnData, id passParameters))success
          failure:(void (^)(id returnData , NSError *error ,id passParameters))failure{
     
     [self setRequestURL];
+    self.params = [self parametersMap];
     NSString *path = [self.requestURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
     if (method == ACRequestMethodGet)
     {
