@@ -9,7 +9,7 @@
 #import "ACNetworkHTRM.h"
 
 @implementation ACNetworkHTRM
-+ (instancetype)request
++ (instancetype)requestInit
 {
     return [[[self class] alloc] init];
 }
@@ -56,18 +56,16 @@
     return [NSDictionary dictionaryWithDictionary:params];
 }
 
-- (void)download:(NSString *)downloadURLStirng
-       andMethod:(NSInteger)method
-    andParameter:(id)parameters
-andPassParameters:(id)passParameters
+- (void)downloadMethod:(NSInteger)method
+     andPassParameters:(id)passParameters
          success:(void (^)(id returnData, id passParameters))success
          failure:(void (^)(id returnData , NSError *error ,id passParameters))failure{
     
-    NSString *path = [self.path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [self setRequestURL];
+    NSString *path = [self.requestURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];    
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
-    
     if (method == ACRequestMethodGet)
     {
         [manager GET:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -128,7 +126,6 @@ uploadDatafileName:(NSString *)fileName
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
     if(method == ACRequestMethodPost)
     {
-        //NSData *imageData = UIImageJPEGRepresentation(self.avatarView.image, 0.5);
         AFHTTPRequestOperation *operation = [manager POST:uploadURLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:uploadData name:dataKey fileName:fileName mimeType:format];
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {

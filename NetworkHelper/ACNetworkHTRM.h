@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
 
 @property(nonatomic) NSTimeInterval timeOutInt;
 @property (nonatomic, strong) NSString *domainName;
-@property (nonatomic, strong) NSString *path;
+@property (nonatomic, strong) NSString *requestURL;
 @property (nonatomic, strong) NSDictionary *params;
 
 + (instancetype)requestInit;
@@ -82,14 +82,16 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
 /**
  *  下载数据接口
  *
- *  @param downloadURLStirng 传入的URL
  *  @param method            传输的方法
  *  @param parameters        传输的参数
  *  @param passParameters    回调的对象
  *  @param success           成功返回的方法
  *  @param failure           失败返回的方法
  */
-- (void)download:(NSString *)downloadURLStirng andMethod:(NSInteger)method andParameter:(id)parameters andPassParameters:(id)passParameters success:(void (^)(id returnData, id passParameters))success failure:(void (^)(id returnData , NSError *error ,id passParameters))failure;
+
+- (void)downloadMethod:(NSInteger)method andPassParameters:(id)passParameters
+               success:(void (^)(id returnData, id passParameters))success
+               failure:(void (^)(id returnData , NSError *error ,id passParameters))failure;
 
 
 - (void)upload:(NSString *)uploadURLString andMethod:(NSInteger)method andParameter:(id)parameters andPassParameters:(id)passParameters andUpladData:(NSData *)uploadData dataForKey:(NSString *)dataKey uploadDatafileName:(NSString *)fileName format:(NSString *)format
