@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     	= "https://github.com/AllanChen/ACNetworkframework"
   s.frameworks  	= "QuartzCore", "UIKit"
-  s.license      	= "MIT (example)"
+  s.license      	= "MIT"
   s.author       	= { "Allan" => "cyjian0@gmail.com" }
   s.source       	= { :git => "https://github.com/AllanChen/ACNetworkframework.git", :tag => "0.0.1" }
   s.source_files  	= "NetworkHelper", "NetworkHelper/**/*.{h,m}", "Helper", "Helper/**/*.{h,m}"
