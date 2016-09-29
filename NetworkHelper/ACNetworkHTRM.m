@@ -27,10 +27,7 @@
     NSData *certData = [NSData dataWithContentsOfFile:cerPath];
     AFSecurityPolicy *securityPolicy = [[AFSecurityPolicy alloc] init];
     [securityPolicy setAllowInvalidCertificates:NO];
-    [securityPolicy setPinnedCertificates:@[certData]];
-    //[securityPolicy setSSLPinningMode:AFSSLPinningModeCertificate];
-    /**** SSL Pinning ****/
-    
+    [securityPolicy setPinnedCertificates:@[certData]];    
     return securityPolicy;
 }
 
@@ -70,50 +67,52 @@
     [self setRequestURL];
     self.params = [self parametersMap];
     NSString *path = [self.requestURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [self setRequestSerializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
     if (method == ACRequestMethodGet)
     {
-        [manager GET:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if (success)
-                success(responseObject,passParameters);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (failure)
-                failure(operation.responseObject,error,passParameters);
+        [manager GET:path parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if(success)
+            success(responseObject,passParameters);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            if(failure)
+             failure(task,error,passParameters);
         }];
     }
     
     if (method == ACRequestMethodPost)
     {
-        [manager POST:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if (success)
-                success(responseObject,passParameters);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [manager POST:path parameters:self.params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if(success)
+            success(responseObject,passParameters);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             if(failure)
-                failure(operation.responseObject,error,passParameters);
+            failure(task,error,passParameters);
         }];
     }
     
     if (method == ACRequestMethodPut)
     {
-        [manager PUT:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if (success)
-                success(responseObject,passParameters);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        [manager PUT:path parameters:self.params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if(success)
+            success(responseObject,passParameters);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             if(failure)
-                failure(operation.responseObject,error,passParameters);
+            failure(task,error,passParameters);
         }];
     }
     
     if (method == ACRequestMethodDelete)
     {
-        [manager DELETE:path parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if (success)
-                success(responseObject,passParameters);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [manager DELETE:path parameters:self.params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if(success)
+            success(responseObject,passParameters);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             if(failure)
-                failure(operation.responseObject,error,passParameters);
+            failure(task,error,passParameters);
         }];
     }
 }
@@ -128,20 +127,18 @@ uploadDatafileName:(NSString *)fileName
         format:(NSString *)format
        success:(void (^)(id returnData, id passParameters,id progress))success
        failure:(void (^)(id returnData , NSError *error ,id passParameters))failure{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
     if(method == ACRequestMethodPost)
     {
-        AFHTTPRequestOperation *operation = [manager POST:uploadURLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [manager POST:uploadURLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             [formData appendPartWithFileData:uploadData name:dataKey fileName:fileName mimeType:format];
-        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            success(responseObject,passParameters,operation.responseString);
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            failure(operation.responseObject,error,passParameters);
+        } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            success(responseObject,passParameters,nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            failure(responseObject,error,passParameters);
         }];
-        [operation start];
         
     }
 }

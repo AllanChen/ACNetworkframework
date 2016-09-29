@@ -5,11 +5,6 @@
 //  Created by it on 6/24/16.
 //
 //
-
-#import <Foundation/Foundation.h>
-#import "AFNetworking.h"
-#define OPENSSL NO
-
 #import "AFNetworking.h"
 #import <Foundation/Foundation.h>
 typedef NS_ENUM(NSInteger , ACRequestMethod) {
@@ -41,7 +36,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param requestTimeOut 过期时间，以秒为单位
  */
 
-- (void)setRequestTimeOut:(AFHTTPRequestOperationManager *)manager;
+- (void)setRequestTimeOut:(AFHTTPRequestSerializer *)manager;
 
 /**
  *  设置HTTP Header
@@ -50,7 +45,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param value Value For Header
  */
 
-- (void)setHeaderValue:(AFHTTPRequestOperationManager *)manager;
+- (void)setHeaderValue:(AFHTTPRequestSerializer *)manager;
 
 
 /**
@@ -59,7 +54,7 @@ typedef NS_ENUM(NSInteger , ACRequestMethod) {
  *  @param key   Keys For Header - -
  *  @param value Values For Header
  */
-- (void)setHeaderByArray:(AFHTTPRequestOperationManager *)manager;
+- (void)setHeaderByArray:(AFHTTPRequestSerializer *)manager;
 
 
 /**
