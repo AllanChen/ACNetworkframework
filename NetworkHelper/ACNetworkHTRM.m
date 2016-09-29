@@ -137,7 +137,7 @@ uploadDatafileName:(NSString *)fileName
         } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             success(responseObject,passParameters,nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            failure(responseObject,error,passParameters);
+            failure(task,error,passParameters);
         }];
         
     }
