@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         	= "ACNetworkframework"
-  s.version        = "0.0.1"
+  s.version        = "0.0.4"
   s.summary      	= "This Networkframework is easy to use, you just add 2 files that network function is work for all page"
   s.ios.deployment_target = "7.0"
   s.description  	= <<-DESC
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license      	= "MIT"
   s.author       	= { "Allan" => "cyjian0@gmail.com" }
   s.source        = { :git => "https://github.com/AllanChen/ACNetworkframework.git", :branch => "master",
-                   :tag => "0.0.1" }
+                   :tag => "0.0.4" }
   s.source_files  	= "NetworkHelper", "NetworkHelper/**/*.{h,m}", "Helper", "Helper/**/*.{h,m}"
   s.dependency "AFNetworking", "~> 3.0"
   s.platform     	= :ios, "7.0"
