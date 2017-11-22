@@ -41,7 +41,7 @@
 }
 
 - (AFJSONRequestSerializer *)setRequestSerializer{
-    [AFJSONRequestSerializer serializer];
+    return [AFJSONRequestSerializer serializer];
 }
 
 - (void)setRequestTimeOut:(AFJSONRequestSerializer *)manager
